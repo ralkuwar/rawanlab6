@@ -343,5 +343,3 @@ There is obviously so much more to Materialize, but this is a good introduction 
 # <span class="mega-icon mega-icon-issue-opened"></span>Stop
 
 Show a TA that you have the book form is working and formatted properly. Also show the TA your git log so he/she can see that you've made regular commits and have merged the final results back to master. Make sure the TA initials your sheet.
-
-* * *
