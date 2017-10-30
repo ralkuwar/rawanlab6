@@ -128,7 +128,6 @@ to install the new materialize gem in this project.
 ```
 //= require rails-ujs
 //= require jquery
-//= require turbolinks
 //= require materialize-sprockets
 //= require_tree .
 ```
