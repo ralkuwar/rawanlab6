@@ -2,11 +2,7 @@
 
 1.  For this project we are using another version of the BookManager application we've developed previously. To get a copy of this new project, use git to clone the [BookManager_3 project on github](https://github.com/495-Labs-Projects/Lab7StarterRepo.git) and review the contents before proceeding.
 
-2.  If you are on a Mac, you will need to have Node.js and Node Package Manager installed `npm` on your machine. (If you are using the VM, this has already been installed.) You can get it directly with an easy package installer at the [Node Project download page](http://nodejs.org/download/) or if you have homebrew installed, you can run `brew install node` (which should also include npm). If you are on Ubuntu, running `sudo apt-get install nodejs npm` should do the trick.
-
---IS STEP 2 STILL NECESSARY?
-
-3.  Run the bundle command to install the new gems used in this project:
+2.  Run the bundle command to install the new gems used in this project:
 
     ```
       bundle install
@@ -15,7 +11,7 @@
 
     Commit these changes to git.
 
-4.  Run `git branch` to see that you are on the master branch. Run the `rake db:migrate` command to generate the development database and then run `rake db:populate` to add records to your development database. Start the server and verify that the basic app is running by looking at the various book lists. (There are no controllers yet for authors and categories, so limit yourself to books for now.)
+3.  Run `git branch` to see that you are on the master branch. Run the `rake db:migrate` command to generate the development database and then run `rake db:populate` to add records to your development database. Start the server and verify that the basic app is running by looking at the various book lists. (There are no controllers yet for authors and categories, so limit yourself to books for now.)
 
 5.  First thing to do is build some controllers for authors. Open the `authors_controller.rb` file inside of `app/controllers` and within the class definition, let's add some code to restrict the types of parameters we will accept from users. We will make this a private method so that it can only be called by other methods within the class. The code below will help us do that:
 
@@ -28,7 +24,7 @@
 
     ```
 
-6.  When we work with show, edit, update and destroy actions, we will be working with a particular author based on an author id provided by the user via our interface. We want to create this author and assign it to an `@author` object before starting each of these methods. Put the following code at the top of (but still inside) the class definition:
+4.  When we work with show, edit, update and destroy actions, we will be working with a particular author based on an author id provided by the user via our interface. We want to create this author and assign it to an `@author` object before starting each of these methods. Put the following code at the top of (but still inside) the class definition:
 
     ```ruby
       before_action :set_author, only: [:show, :edit, :update, :destroy]
@@ -44,7 +40,7 @@
 
     ```
 
-7.  Now time to create our standard RESTful actions: index, show, new, edit, create, update and destroy. We begin with `index`. Create an index method (if you use Sublime or Textmate, type def and hit `tab` and a basic method structure is created) and add the following code to instruct model to give us all active authors in alphabetical order and to use will_paginate to prepare it for pagination:
+5.  Now time to create our standard RESTful actions: index, show, new, edit, create, update and destroy. We begin with `index`. Create an index method (if you use Sublime or Textmate, type def and hit `tab` and a basic method structure is created) and add the following code to instruct model to give us all active authors in alphabetical order and to use will_paginate to prepare it for pagination:
 
     ```ruby
       @authors = Author.active.alphabetical.paginate(:page => params[:page]).per_page(10)
@@ -53,7 +49,7 @@
 
     **Put the index action and all the other standard controller actions above the private methods we created earlier. Everything after the key word 'private' will be a private method and we want actions like index, show, and the like to be public.**
 
-8.  To create actions for show and edit, we just need the basic `def ... end` structure in place for each method. The controller will build the `@author` object for us using the before_filter we set up and it will expect a show and edit template to be in place in the `app/views/authors` directory (which is there but we will improve upon later). For the new method, we need a blank [@author](http://your-domain.com/author) object for the user to populate with data and we can do this easily enough with:
+6.  To create actions for show and edit, we just need the basic `def ... end` structure in place for each method. The controller will build the `@author` object for us using the before_filter we set up and it will expect a show and edit template to be in place in the `app/views/authors` directory (which is there but we will improve upon later). For the new method, we need a blank [@author](http://your-domain.com/author) object for the user to populate with data and we can do this easily enough with:
 
     ```ruby
       def new
@@ -62,7 +58,7 @@
 
     ```
 
-9.  In our create and update actions, we will use our `author_params` method created earlier to make sure the parameters being sent are allowable. If we can create (or update) the [@author](http://your-domain.com/author) object, then we will go to the author's show page and flash a quick message saying the changes where made; otherwise we will go back to the original form and show error messages. The code to do this is below:
+7.  In our create and update actions, we will use our `author_params` method created earlier to make sure the parameters being sent are allowable. If we can create (or update) the [@author](http://your-domain.com/author) object, then we will go to the author's show page and flash a quick message saying the changes where made; otherwise we will go back to the original form and show error messages. The code to do this is below:
 
     ```ruby
       def create
@@ -84,7 +80,7 @@
 
     ```
 
-10.  To create the destroy action we want to destroy the `@author` object and then return to the overall authors list (index). The following code will do that:
+8.  To create the destroy action we want to destroy the `@author` object and then return to the overall authors list (index). The following code will do that:
 
     ```ruby
       def destroy
@@ -94,10 +90,10 @@
 
     ```
 
-11.  Our authors controller is good, but without routes to direct to these actions, they are pretty useless. We could generate the seven routes manually or take advantage of Rails built-in shortcut that was demonstrated in class. Go to the `config/routes.rb` file and add
+9.  Our authors controller is good, but without routes to direct to these actions, they are pretty useless. We could generate the seven routes manually or take advantage of Rails built-in shortcut that was demonstrated in class. Go to the `config/routes.rb` file and add
     `resources :authors` right below similar code for books -- this will generate the seven standard routes we need to use this controller properly.
 
-12.  Verify that the routes and controller are working in the browser and then commit your changes to git if you have not done so already. (Hopefully you have...) If time allows, follow a similar procedure to build your categories controller. You will need to add a resources line to your routes file for categories, and create the same set of methods in the categories controller.
+10.  Verify that the routes and controller are working in the browser and then commit your changes to git if you have not done so already. (Hopefully you have...) If time allows, follow a similar procedure to build your categories controller. You will need to add a resources line to your routes file for categories, and create the same set of methods in the categories controller.
 
 # <span class="mega-icon mega-icon-issue-opened"></span>Stop
 
