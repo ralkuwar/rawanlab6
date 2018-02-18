@@ -15,7 +15,9 @@
     <td><%= link_to book.title, book_path(book) %></td>
     <td><%= book.category.name %></td>
 		<td><%= book.proposal_date.strftime("%m/%d/%y") %></td>
+	  	<%if book.authors != []%>
 		<td><%= book.authors.alphabetical.first.name %></td>
+	  	<% end %>
     <td><%= link_to 'Edit', edit_book_path(book) %></td>
     <td><%= link_to 'Destroy', book, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
