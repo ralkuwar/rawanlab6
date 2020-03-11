@@ -1,6 +1,6 @@
 # Part 1
 
-1.  For this project we are using another version of the BookManager application we've developed previously. To get a copy of this new project, use git to clone the [BookManager_3 project on github](https://github.com/495-Labs-Projects/Lab7StarterRepo.git) and review the contents before proceeding.
+1.  For this project we are using another version of the BookManager application we've developed previously. To get a copy of this new project, use git to clone the [BookManager_3 project on github](https://github.com/preethagopinath/Lab6StarterRepo.git) and review the contents before proceeding.
 
 2.  Run `bundle install` from the terminal to install the new gems used in this project:
 
