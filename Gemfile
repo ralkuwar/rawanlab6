@@ -58,6 +58,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'simplecov'
   gem 'single_test'
+  gem 'test-unit'
 end
 
 group :development do
